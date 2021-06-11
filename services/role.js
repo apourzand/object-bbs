@@ -1,13 +1,13 @@
-const roleDAO = require('../dao/role');
+const roleDAO = require('../dao/role')
 
 class RoleService {
   getRoles() {
-    return roleDAO.findAll();
+    return roleDAO.findAll()
   }
 
   getRole(id) {
-    return roleDAO.findById(id);
+    return roleDAO.findById(id)
   }
 }
 
-module.exports = new RoleService();
+module.exports = new RoleService()

@@ -1,11 +1,11 @@
-const { Model } = require("objection");
-const Role = require("./Role");
+const { Model } = require("objection")
+const Role = require("./Role")
 
 
 class User extends Model {
 
     static get tableName() {
-        return "user";
+        return "user"
     }
 
     static get relationMappings() {
@@ -22,4 +22,4 @@ class User extends Model {
     }
 }
 
-module.exports = User;
+module.exports = User

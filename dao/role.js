@@ -1,13 +1,13 @@
-const Role = require('../models/role');
+const Role = require('../models/role')
 
 class RoleDAO {
   findAll() {
-    return Role.query();
+    return Role.query()
   }
 
   findById(id) {
-    return Role.query().findById(id);
+    return Role.query().findById(id)
   }
 }
 
-module.exports = new RoleDAO();
+module.exports = new RoleDAO()

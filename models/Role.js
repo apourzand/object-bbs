@@ -1,10 +1,10 @@
-const { Model } = require("objection");
+const { Model } = require("objection")
 
 class Role extends Model {
 
     static get tableName() {
-        return "role";
+        return "role"
     }
 }
 
-module.exports = Role;
+module.exports = Role
