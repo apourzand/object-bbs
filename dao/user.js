@@ -26,6 +26,14 @@ class UserDAO {
     // return the user object
     return user
   }
+
+  async delete(id) {
+    // Delete the user.
+    const numDeleted = await User.query().deleteById(id);
+
+    // return the numDeleted
+    return numDeleted
+  }
 }
 
 module.exports = new UserDAO()

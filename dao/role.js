@@ -26,6 +26,14 @@ class RoleDAO {
     // return the role object
     return role
   }
+
+  async delete(id) {
+    // Delete the Role.
+    const numDeleted = await Role.query().deleteById(id);
+
+    // return the numDeleted
+    return numDeleted
+  }
 }
 
 module.exports = new RoleDAO()

@@ -8,5 +8,6 @@ router.get('/', roleController.getRoles)
 router.get('/:id', roleController.getRole)
 router.post('/', roleController.addRole)
 router.patch('/:id', roleController.updateRole)
+router.delete('/:id', roleController.deleteRole)
 
 module.exports = router

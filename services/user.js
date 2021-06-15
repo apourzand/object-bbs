@@ -16,6 +16,10 @@ class UserService {
   updateUser(id, data) {
     return userDAO.update(id, data)
   }
+
+  deleteUser(id) {
+    return userDAO.delete(id)
+  }
 }
 
 module.exports = new UserService()
