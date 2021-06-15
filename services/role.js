@@ -8,6 +8,10 @@ class RoleService {
   getRole(id) {
     return roleDAO.findById(id)
   }
+
+  addRole(data) {
+    return roleDAO.add(data)
+  }
 }
 
 module.exports = new RoleService()

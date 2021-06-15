@@ -6,5 +6,6 @@ const router = express.Router()
 //Role
 router.get('/', roleController.getRoles)
 router.get('/:id', roleController.getRole)
+router.post('/', roleController.addRole)
 
 module.exports = router

@@ -8,6 +8,15 @@ class RoleDAO {
   findById(id) {
     return Role.query().findById(id)
   }
+
+  async add(data) {
+    // Add the Role.
+    Role.fromJson(data);
+    let role = await Role.query().insert(data);
+
+    // return the role object
+    return role;
+  }
 }
 
 module.exports = new RoleDAO()

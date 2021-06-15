@@ -18,5 +18,5 @@ app.use('/user', require('./routes/user'))
 app.use('/role',  require('./routes/role'))
 
 app.listen(port, () => {
-    console.log(`App listening at http://localhost:${port}`)
+    console.log(`${new Date()} : App listening at http://localhost:${port}`)
 })

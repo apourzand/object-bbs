@@ -20,6 +20,17 @@ class UserController {
       res.status(500).json(err)
     }
   }
+
+  async addUser(req, res, next) {
+    try {
+      const user = await userService.addUser(req.body)
+      res.json(user)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json(err)
+    }
+  }
+
 }
 
 module.exports = new UserController()
