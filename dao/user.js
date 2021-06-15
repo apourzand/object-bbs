@@ -18,6 +18,14 @@ class UserDAO {
     return user;
   }
 
+  async update(id, data) {
+    // Update the User.
+    const user = await User.query()
+    .patchAndFetchById(id, data);
+  
+    // return the user object
+    return user
+  }
 }
 
 module.exports = new UserDAO()

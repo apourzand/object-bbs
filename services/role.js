@@ -12,6 +12,10 @@ class RoleService {
   addRole(data) {
     return roleDAO.add(data)
   }
+
+  updateRole(id, data) {
+    return roleDAO.update(id, data)
+  }
 }
 
 module.exports = new RoleService()

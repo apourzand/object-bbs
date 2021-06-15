@@ -7,5 +7,6 @@ const router = express.Router()
 router.get('/', roleController.getRoles)
 router.get('/:id', roleController.getRole)
 router.post('/', roleController.addRole)
+router.patch('/:id', roleController.updateRole)
 
 module.exports = router

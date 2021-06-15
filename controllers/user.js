@@ -30,7 +30,16 @@ class UserController {
       res.status(500).json(err)
     }
   }
-
+  
+  async updateUser(req, res, next) {
+    try {
+      const user = await userService.updateUser(req.params.id, req.body)
+      res.json(user)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json(err)
+    }
+  }
 }
 
 module.exports = new UserController()

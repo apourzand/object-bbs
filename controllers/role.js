@@ -30,6 +30,16 @@ class RoleController {
       res.status(500).json(err)
     }
   }
+
+  async updateRole(req, res, next) {
+    try {
+      const role = await roleService.updateRole(req.params.id, req.body)
+      res.json(role)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json(err)
+    }
+  }
 }
 
 module.exports = new RoleController()

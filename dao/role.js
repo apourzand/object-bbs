@@ -17,6 +17,15 @@ class RoleDAO {
     // return the role object
     return role;
   }
+
+  async update(id, data) {
+    // Update the Role.
+    const role = await Role.query()
+    .patchAndFetchById(id, data);
+  
+    // return the role object
+    return role
+  }
 }
 
 module.exports = new RoleDAO()

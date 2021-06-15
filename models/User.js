@@ -1,8 +1,8 @@
-const { Model } = require("objection")
+const Base = require("./Base")
 const Role = require("./Role")
 
 
-class User extends Model {
+class User extends Base {
 
     static get tableName() {
         return "user"
@@ -11,7 +11,7 @@ class User extends Model {
     static get relationMappings() {
         return {
             role: {
-                relation: Model.BelongsToOneRelation,
+                relation: Base.BelongsToOneRelation,
                 modelClass: Role,
                 join: {
                     from: "user.roleId",
@@ -36,7 +36,6 @@ class User extends Model {
             }
         };
     }
-
 }
 
 module.exports = User

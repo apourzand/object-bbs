@@ -1,6 +1,7 @@
 require('dotenv').config()
 const setupDb = require('./db-setup')
 const express = require('express')
+const { format } = require("fecha")
 
 setupDb()
 
@@ -18,5 +19,5 @@ app.use('/user', require('./routes/user'))
 app.use('/role',  require('./routes/role'))
 
 app.listen(port, () => {
-    console.log(`${new Date()} : App listening at http://localhost:${port}`)
+    console.log(`${format(new Date(), 'isoDateTime').slice(0, 19).replace('T', ' ')} : App listening at http://localhost:${port}`)
 })
