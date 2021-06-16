@@ -1,7 +1,7 @@
 var fs = require('fs')
 const toUcFirst = str => str.charAt(0).toUpperCase() + str.slice(1)
 
-var entity = 'haha'
+var entity = 'accessRight'
 
 var dirs = ['dao', 'service', 'controller', 'route',]
 
