@@ -1,0 +1,55 @@
+const ##lc##Service = require('../services/##lc##')
+
+class ##UC##Controller {
+  async get##UC##s(req, res, next) {
+    try {
+      const ##lc##s = await ##lc##Service.get##UC##s()
+      res.json(##lc##s)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json(err)
+    }
+  }
+
+  async get##UC##(req, res, next) {
+    try {
+      const ##lc## = await ##lc##Service.get##UC##(req.params.id)
+      res.json(##lc##)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json(err)
+    }
+  }
+
+  async add##UC##(req, res, next) {
+    try {
+      const ##lc## = await ##lc##Service.add##UC##(req.body)
+      res.json(##lc##)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json(err)
+    }
+  }
+
+  async update##UC##(req, res, next) {
+    try {
+      const ##lc## = await ##lc##Service.update##UC##(req.params.id, req.body)
+      res.json(##lc##)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json(err)
+    }
+  }
+
+  async delete##UC##(req, res, next) {
+    try {
+      const ##lc## = await ##lc##Service.delete##UC##(req.params.id)
+      res.json(##lc##)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json(err)
+    }
+  }
+}
+
+module.exports = new ##UC##Controller()

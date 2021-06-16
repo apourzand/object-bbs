@@ -1,0 +1,39 @@
+const ##UC## = require('../models/##lc##')
+
+class ##UC##DAO {
+  findAll() {
+    return ##UC##.query()
+  }
+
+  findById(id) {
+    return ##UC##.query().findById(id)
+  }
+
+  async add(data) {
+    // Add the ##UC##.
+    ##UC##.fromJson(data);
+    let ##lc## = await ##UC##.query().insert(data);
+
+    // return the ##lc## object
+    return ##lc##;
+  }
+
+  async update(id, data) {
+    // Update the ##UC##.
+    const ##lc## = await ##UC##.query()
+    .patchAndFetchById(id, data);
+  
+    // return the ##lc## object
+    return ##lc##
+  }
+
+  async delete(id) {
+    // Delete the ##UC##.
+    const numDeleted = await ##UC##.query().deleteById(id);
+
+    // return the numDeleted
+    return numDeleted
+  }
+}
+
+module.exports = new ##UC##DAO()

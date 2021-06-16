@@ -1,0 +1,13 @@
+const express = require('express')
+const ##lc##Controller = require('../controllers/##lc##')
+
+const router = express.Router()
+
+//##UC##
+router.get('/', ##lc##Controller.get##UC##s)
+router.get('/:id', ##lc##Controller.get##UC##)
+router.post('/', ##lc##Controller.add##UC##)
+router.patch('/:id', ##lc##Controller.update##UC##)
+router.delete('/:id', ##lc##Controller.delete##UC##)
+
+module.exports = router
