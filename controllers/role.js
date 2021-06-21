@@ -4,6 +4,7 @@ class RoleController {
   async getRoles(req, res, next) {
     try {
       const roles = await roleService.getRoles()
+      res.set('X-Total-Count',roles.length);
       res.json(roles)
     } catch (err) {
       console.error(err)

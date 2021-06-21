@@ -7,7 +7,7 @@ const router = express.Router()
 router.get('/', accessProfileController.getAccessProfiles)
 router.get('/:id', accessProfileController.getAccessProfile)
 router.post('/', accessProfileController.addAccessProfile)
-router.patch('/:id', accessProfileController.updateAccessProfile)
+router.put('/:id', accessProfileController.updateAccessProfile)
 router.delete('/:id', accessProfileController.deleteAccessProfile)
 
 module.exports = router

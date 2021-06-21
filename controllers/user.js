@@ -4,6 +4,7 @@ class UserController {
   async getUsers(req, res, next) {
     try {
       const users = await userService.getUsers()
+      res.set('X-Total-Count',users.length);
       res.json(users)
     } catch (err) {
       console.error(err)
