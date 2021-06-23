@@ -2,7 +2,7 @@ import React from "react"
 import { 
     List, Datagrid, TextField,
     Create, Edit, 
-    SimpleForm, ReferenceInput, TextInput, SelectInput
+    SimpleForm, TextInput
 } from 'react-admin';
 
 
