@@ -4,6 +4,7 @@ class FacilityController {
   async getFacilitys(req, res, next) {
     try {
       const facilitys = await facilityService.getFacilitys()
+      res.set('X-Total-Count', facilitys.length);
       res.json(facilitys)
     } catch (err) {
       console.error(err)

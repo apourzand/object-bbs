@@ -4,6 +4,7 @@ class AccessProfileController {
   async getAccessProfiles(req, res, next) {
     try {
       const accessProfiles = await accessProfileService.getAccessProfiles()
+      res.set('X-Total-Count', accessProfiles.length)
       res.json(accessProfiles)
     } catch (err) {
       console.error(err)

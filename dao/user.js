@@ -2,11 +2,11 @@ const User = require('../models/user')
 
 class UserDAO {
   findAll() {
-    return User.query().withGraphFetched('role')
+    return User.query().withGraphFetched('role').withGraphFetched('accessRights')
   }
 
   findById(id) {
-    return User.query().findById(id).withGraphFetched('role')
+    return User.query().findById(id).withGraphFetched('role').withGraphFetched('accessRights')
   }
 
   async add(data) {

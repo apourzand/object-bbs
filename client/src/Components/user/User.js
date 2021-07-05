@@ -3,8 +3,13 @@ import {
   List, Datagrid, TextField, EmailField,
   Create, Edit,
   SimpleForm, ReferenceInput, TextInput, SelectInput, PasswordInput,
-  useMutation, useRedirect
+  useMutation, useRedirect, ArrayInput, SimpleFormIterator
 } from 'react-admin';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  inlineBlock: { display: 'inline-flex', marginRight: '1rem' },
+});
 
 export const UserList = props => (
   <List {...props}>
@@ -40,6 +45,7 @@ export const UserEdit = props => {
     },
     [mutate, redirect]
   );
+  const classes = useStyles();
 
   return (
     <Edit undoable={false} {...props}>
@@ -51,6 +57,16 @@ export const UserEdit = props => {
         <ReferenceInput source="roleId" reference="role">
           <SelectInput optionText="name" />
         </ReferenceInput>
+        <ArrayInput source="accessRights">
+          <SimpleFormIterator>
+            <ReferenceInput source="facilityId" reference="facility" label="Facility" formClassName={classes.inlineBlock} >
+              <SelectInput optionText="name" />
+            </ReferenceInput>
+            <ReferenceInput source="accessProfileId" reference="accessProfile" label="Access profile" formClassName={classes.inlineBlock} >
+              <SelectInput optionText="name" />
+            </ReferenceInput>
+          </SimpleFormIterator>
+        </ArrayInput>
       </SimpleForm>
     </Edit>
   )

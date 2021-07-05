@@ -1,5 +1,6 @@
 const Base = require("./Base")
 const Role = require("./Role")
+const AccessRight = require("./AccessRight")
 const Password = require('objection-password')();
 
 class User extends Password(Base) {
@@ -17,7 +18,16 @@ class User extends Password(Base) {
                     from: "user.roleId",
                     to: "role.id"
                 }
-            }
+            },
+            accessRights: {
+                relation: Base.HasManyRelation,
+                modelClass: AccessRight,
+                join: {
+                    from: "user.id",
+                    to: "access_right.userId"
+                }
+            },
+
         }
     }
 
