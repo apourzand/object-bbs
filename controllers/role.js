@@ -1,4 +1,5 @@
 const roleService = require('../services/role')
+const errorHandler = require('../error-handler')
 
 class RoleController {
   async getRoles(req, res, next) {
@@ -15,10 +16,16 @@ class RoleController {
   async getRole(req, res, next) {
     try {
       const role = await roleService.getRole(req.params.id)
+      if (!role) {
+        res.status(404).send({
+          message: "No record with id " + req.params.id,
+          type: "NotFound",
+          data: {}
+        });
+      }
       res.json(role)
     } catch (err) {
-      console.error(err)
-      res.status(500).json(err)
+      errorHandler(err, res)
     }
   }
 
@@ -27,8 +34,7 @@ class RoleController {
       const role = await roleService.addRole(req.body)
       res.json(role)
     } catch (err) {
-      console.error(err)
-      res.status(500).json(err)
+      errorHandler(err, res)
     }
   }
 
@@ -37,8 +43,7 @@ class RoleController {
       const role = await roleService.updateRole(req.params.id, req.body)
       res.json(role)
     } catch (err) {
-      console.error(err)
-      res.status(500).json(err)
+      errorHandler(err, res)
     }
   }
 

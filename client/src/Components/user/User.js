@@ -1,11 +1,10 @@
-import React, {useCallback} from "react"
+import React, { useCallback } from "react"
 import {
   List, Datagrid, TextField, EmailField,
   Create, Edit,
-  SimpleForm, ReferenceInput, TextInput, SelectInput,
-  useMutation
+  SimpleForm, ReferenceInput, TextInput, SelectInput, PasswordInput,
+  useMutation, useRedirect
 } from 'react-admin';
-import { errorHandler } from "../../error-handler";
 
 export const UserList = props => (
   <List {...props}>
@@ -19,46 +18,76 @@ export const UserList = props => (
   </List>
 );
 
-export const UserEdit = props => (
-  <Edit {...props}>
-    <SimpleForm>
-      <TextInput source="firstName" />
-      <TextInput source="lastName" />
-      <TextInput source="email" />
-      <ReferenceInput source="roleId" reference="role">
-        <SelectInput optionText="name" />
-      </ReferenceInput>
-    </SimpleForm>
-  </Edit>
-);
+export const UserEdit = props => {
+  const [mutate] = useMutation();
+  const redirect = useRedirect();
+  const save = useCallback(
+    async (values) => {
+      try {
+        await mutate({
+          type: 'update',
+          resource: 'user',
+          payload: { id: values.id, data: values },
+        }, {
+          returnPromise: true,
+          onSuccess: (data) => {
+            redirect('edit', '/user', data['data']['id']);
+          }
+        });
+      } catch (error) {
+        return error.body
+      }
+    },
+    [mutate, redirect]
+  );
+
+  return (
+    <Edit undoable={false} {...props}>
+      <SimpleForm save={save}>
+        <TextInput source="firstName" />
+        <TextInput source="lastName" />
+        <TextInput source="email" />
+        <PasswordInput source="password" />
+        <ReferenceInput source="roleId" reference="role">
+          <SelectInput optionText="name" />
+        </ReferenceInput>
+      </SimpleForm>
+    </Edit>
+  )
+};
 
 
 export const UserCreate = (props) => {
   const [mutate] = useMutation();
-  const save = useCallback( 
+  const redirect = useRedirect();
+  const save = useCallback(
     async (values) => {
       try {
         await mutate({
           type: 'create',
           resource: 'user',
           payload: { data: values },
-        }, { returnPromise: true });
+        }, {
+          returnPromise: true,
+          onSuccess: (data) => {
+            redirect('edit', '/user', data['data']['id']);
+          }
+        });
       } catch (error) {
-        if (error.body.data) {
-          return errorHandler(error.body);
-        }
+        return error.body
       }
     },
-    [mutate]
+    [mutate, redirect]
   );
-  
+
 
   return (
-    <Create  undoable="false" {...props}>
+    <Create undoable="false" {...props}>
       <SimpleForm save={save}>
         <TextInput source="firstName" />
         <TextInput source="lastName" />
         <TextInput source="email" />
+        <PasswordInput source="password" />
         <ReferenceInput source="roleId" reference="role">
           <SelectInput optionText="name" />
         </ReferenceInput>
@@ -66,17 +95,3 @@ export const UserCreate = (props) => {
     </Create>
   );
 };
-
-// export const UserCreate = props => (
-//   <Create {...props}>
-//     <SimpleForm>
-//       <TextInput source="firstName" />
-//       <TextInput source="lastName" />
-//       <TextInput source="email" />
-//       <ReferenceInput source="roleId" reference="role">
-//         <SelectInput optionText="name" />
-//       </ReferenceInput>
-//     </SimpleForm>
-//   </Create>
-// );
-

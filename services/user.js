@@ -20,6 +20,9 @@ class UserService {
   deleteUser(id) {
     return userDAO.delete(id)
   }
+  getUserByEmail(email) {
+    return userDAO.findByEmail(email)
+  }
 }
 
 module.exports = new UserService()

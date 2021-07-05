@@ -1,8 +1,8 @@
 const Base = require("./Base")
 const Role = require("./Role")
+const Password = require('objection-password')();
 
-
-class User extends Base {
+class User extends Password(Base) {
 
     static get tableName() {
         return "user"
@@ -30,6 +30,7 @@ class User extends Base {
                 firstName: { type: 'string', minLength: 2, maxLength: 255 },
                 lastName: { type: 'string', minLength: 2, maxLength: 255 },
                 email: { type: 'string', format: 'email' },
+                password: { type: 'string' },
                 roleId: { type: 'integer' },
                 createdAt: { type: 'string' }, // optional
                 updatedAt: { type: 'string' } // optional

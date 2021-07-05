@@ -34,6 +34,10 @@ class UserDAO {
     // return the numDeleted
     return numDeleted
   }
+
+  findByEmail(email) {
+    return User.query().findOne('email', email).withGraphFetched('role')
+  }
 }
 
 module.exports = new UserDAO()
