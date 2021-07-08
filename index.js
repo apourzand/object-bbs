@@ -11,10 +11,6 @@ const port = process.env.APP_PORT
 
 app.use(express.json())
 
-app.get('/', (req, res) => {
-    res.send('Welcome to object-bbs')
-})
-
 app.use('/', require('./routes/base'))
 app.use('/user', authenticateToken, require('./routes/user'))
 app.use('/role', authenticateToken,  require('./routes/role'))

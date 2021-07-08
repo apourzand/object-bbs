@@ -2,16 +2,17 @@ import React, { useCallback } from "react"
 import {
   List, Datagrid, TextField,
   Create, Edit,
-  SimpleForm, TextInput,
+  SimpleForm, TextInput, BooleanInput,
   useMutation, useRedirect
 } from 'react-admin';
-
+import { BooleanNumField } from '../field/BooleanNumField';
 
 export const FacilityList = props => (
   <List {...props}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="name" />
+      <BooleanNumField source="isActive" />
     </Datagrid>
   </List>
 );
@@ -43,6 +44,7 @@ export const FacilityEdit = props => {
     <Edit undoable={false} {...props}>
       <SimpleForm save={save}>
         <TextInput source="name" />
+        <BooleanInput source="isActive" />
       </SimpleForm>
     </Edit>
   );
@@ -76,6 +78,7 @@ export const FacilityCreate = (props) => {
     <Create undoable="false" {...props}>
       <SimpleForm save={save}>
         <TextInput source="name" />
+        <BooleanInput source="isActive" />
       </SimpleForm>
     </Create>
   );
