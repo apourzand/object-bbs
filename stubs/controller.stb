@@ -3,7 +3,7 @@ const ##lc##Service = require('../services/##lc##')
 class ##UC##Controller {
   async get##UC##s(req, res, next) {
     try {
-      const ##lc##s = await ##lc##Service.get##UC##s()
+      const ##lc##s = await ##lc##Service.get##UC##s(req.query)
       res.set('X-Total-Count',##lc##.length);
       res.json(##lc##s)
     } catch (err) {

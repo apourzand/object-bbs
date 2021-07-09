@@ -3,12 +3,12 @@ import {
   List, Datagrid, TextField,
   Create, Edit,
   SimpleForm, TextInput, BooleanInput,
-  useMutation, useRedirect
+  useMutation, useRedirect, Filter
 } from 'react-admin';
 import { BooleanNumField } from '../field/BooleanNumField';
 
 export const FacilityList = props => (
-  <List {...props}>
+  <List {...props} filters={<FacilityFilter />}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="name" />
@@ -83,3 +83,11 @@ export const FacilityCreate = (props) => {
     </Create>
   );
 }
+
+const FacilityFilter = (props) => (
+    <Filter {...props}>
+        <TextInput source="name" alwaysOn />
+        <BooleanInput source="is_active" defaultValue={true} />
+    </Filter>
+);
+

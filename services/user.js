@@ -1,8 +1,9 @@
 const userDAO = require('../dao/user')
+const raParamParser = require('./raParamParser')
 
 class UserService {
-  getUsers() {
-    return userDAO.findAll()
+  getUsers(params) {
+    return raParamParser(params, userDAO.findAll())
   }
 
   getUser(id) {

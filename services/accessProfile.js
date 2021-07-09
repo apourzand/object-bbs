@@ -1,8 +1,9 @@
 const accessProfileDAO = require('../dao/accessProfile')
+const raParamParser = require('./raParamParser')
 
 class AccessProfileService {
-  getAccessProfiles() {
-    return accessProfileDAO.findAll()
+  getAccessProfiles(params) {
+    return raParamParser(params, accessProfileDAO.findAll())
   }
 
   getAccessProfile(id) {

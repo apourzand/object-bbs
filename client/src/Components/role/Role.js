@@ -3,12 +3,12 @@ import {
   List, Datagrid, TextField,
   Create, Edit,
   SimpleForm, TextInput,
-  useMutation, useRedirect
+  useMutation, useRedirect, Filter
 } from 'react-admin';
 
 
 export const RoleList = props => (
-  <List {...props}>
+  <List {...props} filters={<RoleFilter />}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="name" />
@@ -80,3 +80,9 @@ export const RoleCreate = (props) => {
     </Create>
   );
 }
+
+const RoleFilter = (props) => (
+  <Filter {...props}>
+      <TextInput source="name" alwaysOn />
+  </Filter>
+);

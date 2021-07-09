@@ -3,7 +3,7 @@ const accessProfileService = require('../services/accessProfile')
 class AccessProfileController {
   async getAccessProfiles(req, res, next) {
     try {
-      const accessProfiles = await accessProfileService.getAccessProfiles()
+      const accessProfiles = await accessProfileService.getAccessProfiles(req.query)
       res.set('X-Total-Count', accessProfiles.length)
       res.json(accessProfiles)
     } catch (err) {

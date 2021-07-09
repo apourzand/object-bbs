@@ -4,7 +4,7 @@ const errorHandler = require('../error-handler')
 class RoleController {
   async getRoles(req, res, next) {
     try {
-      const roles = await roleService.getRoles()
+      const roles = await roleService.getRoles(req.query)
       res.set('X-Total-Count',roles.length);
       res.json(roles)
     } catch (err) {

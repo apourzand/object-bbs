@@ -3,7 +3,7 @@ import {
   List, Datagrid, TextField, EmailField,
   Create, Edit,
   SimpleForm, ReferenceInput, TextInput, SelectInput, PasswordInput,
-  useMutation, useRedirect, ArrayInput, SimpleFormIterator
+  useMutation, useRedirect, ArrayInput, SimpleFormIterator, Filter
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -12,7 +12,7 @@ const useStyles = makeStyles({
 });
 
 export const UserList = props => (
-  <List {...props}>
+  <List {...props} filters={<UserFilter />}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="firstName" />
@@ -50,8 +50,8 @@ export const UserEdit = props => {
   return (
     <Edit undoable={false} {...props}>
       <SimpleForm save={save}>
-        <TextInput source="firstName" />
-        <TextInput source="lastName" />
+        <TextInput source="firstName" formClassName={classes.inlineBlock} />
+        <TextInput source="lastName" formClassName={classes.inlineBlock} />
         <TextInput source="email" />
         <PasswordInput source="password" />
         <ReferenceInput source="roleId" reference="role">
@@ -111,3 +111,11 @@ export const UserCreate = (props) => {
     </Create>
   );
 };
+
+const UserFilter = (props) => (
+  <Filter {...props}>
+    <TextInput source="lastName" alwaysOn />
+    <TextInput source="firstName" />
+    <TextInput source="email" />
+  </Filter>
+);

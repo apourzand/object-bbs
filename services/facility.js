@@ -1,8 +1,9 @@
 const facilityDAO = require('../dao/facility')
+const raParamParser = require('./raParamParser')
 
 class FacilityService {
-  getFacilitys() {
-    return facilityDAO.findAll()
+  getFacilitys(params) {
+    return raParamParser(params, facilityDAO.findAll())
   }
 
   getFacility(id) {

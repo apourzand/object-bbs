@@ -1,8 +1,9 @@
 const ##lc##DAO = require('../dao/##lc##')
+const raParamParser = require('./raParamParser')
 
 class ##UC##Service {
-  get##UC##s() {
-    return ##lc##DAO.findAll()
+  get##UC##s(params) {
+    return raParamParser(params, ##lc##DAO.findAll())
   }
 
   get##UC##(id) {

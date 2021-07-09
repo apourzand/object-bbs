@@ -1,8 +1,11 @@
 const roleDAO = require('../dao/role')
+const raParamParser = require('./raParamParser')
+
 
 class RoleService {
-  getRoles() {
-    return roleDAO.findAll()
+  getRoles(params) {
+    
+    return raParamParser(params, roleDAO.findAll())
   }
 
   getRole(id) {

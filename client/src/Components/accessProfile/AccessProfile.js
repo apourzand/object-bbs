@@ -3,12 +3,12 @@ import {
   List, Datagrid, TextField,
   Create, Edit,
   SimpleForm, TextInput,
-  useMutation, useRedirect
+  useMutation, useRedirect, Filter
 } from 'react-admin';
 
 
 export const AccessProfileList = props => (
-  <List {...props}>
+  <List {...props} filters={<AccessProfileFilter />}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="name" />
@@ -80,3 +80,9 @@ export const AccessProfileCreate = (props) => {
     </Create>
   );
 }
+
+const AccessProfileFilter = (props) => (
+  <Filter {...props}>
+      <TextInput source="name" alwaysOn />
+  </Filter>
+);

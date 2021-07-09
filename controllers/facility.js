@@ -3,7 +3,8 @@ const facilityService = require('../services/facility')
 class FacilityController {
   async getFacilitys(req, res, next) {
     try {
-      const facilitys = await facilityService.getFacilitys()
+      console.log(req.query)
+      const facilitys = await facilityService.getFacilitys(req.query)
       res.set('X-Total-Count', facilitys.length);
       res.json(facilitys)
     } catch (err) {

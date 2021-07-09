@@ -4,7 +4,7 @@ const errorHandler = require('../error-handler')
 class UserController {
   async getUsers(req, res, next) {
     try {
-      const users = await userService.getUsers()
+      const users = await userService.getUsers(req.query)
       res.set('X-Total-Count', users.length);
       res.json(users)
     } catch (err) {
