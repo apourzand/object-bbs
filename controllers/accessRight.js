@@ -3,7 +3,8 @@ const accessRightService = require('../services/accessRight')
 class AccessRightController {
   async getAccessRights(req, res, next) {
     try {
-      const accessRights = await accessRightService.getAccessRights()
+      const accessRights = await accessRightService.getAccessRights(req.query)
+      res.set('X-Total-Count', accessRights.length);
       res.json(accessRights)
     } catch (err) {
       console.error(err)

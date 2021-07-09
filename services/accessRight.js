@@ -1,8 +1,10 @@
 const accessRightDAO = require('../dao/accessRight')
+const raParamParser = require('./raParamParser')
+
 
 class AccessRightService {
-  getAccessRights() {
-    return accessRightDAO.findAll()
+  getAccessRights(params) {
+    return raParamParser(params, accessRightDAO.findAll())
   }
 
   getAccessRight(id) {
