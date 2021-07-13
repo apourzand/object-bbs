@@ -1,4 +1,5 @@
-const User = require('../models/user')
+const User = require('../models/User')
+const AccessRightDAO = require('./accessRight')
 
 class UserDAO {
   findAll() {
@@ -20,9 +21,32 @@ class UserDAO {
 
   async update(id, data) {
     // Update the User.
+    if (data.accessRights) {
+      // get the current access rights
+      const oldAccessrights = await AccessRightDAO.findByUserId(id)
+      const newAccessrights = data.accessRights;
+      // build array with ids
+      let oldAccessrightIds = oldAccessrights.map(({ id }) => id)
+      let newAccessrightIds = newAccessrights.map(({ id }) => id)
+      // https://stackoverflow.com/questions/1187518/how-to-get-the-difference-between-two-arrays-in-javascript
+      let difference = oldAccessrightIds.filter(x => !newAccessrightIds.includes(x));
+      difference.forEach((id) => {
+        AccessRightDAO.delete(id)
+      })
+      newAccessrights.forEach((x) => {
+        //console.log(x)
+        if (x.hasOwnProperty('id')) {
+          AccessRightDAO.update(x.id, x)
+        } else {
+          // add user id
+          x.userId = parseInt(id) 
+          AccessRightDAO.add(x)
+        }
+      })
+    }
     const user = await User.query()
-    .patchAndFetchById(id, data);
-  
+      .patchAndFetchById(id, data);
+
     // return the user object
     return user
   }

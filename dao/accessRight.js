@@ -40,6 +40,10 @@ class AccessRightDAO {
     // return the numDeleted
     return numDeleted
   }
+
+  findByUserId(id) {
+    return AccessRight.query().where('userId', id)
+  }
 }
 
 module.exports = new AccessRightDAO()
