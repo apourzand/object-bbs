@@ -34,7 +34,6 @@ class UserDAO {
         AccessRightDAO.delete(id)
       })
       newAccessrights.forEach((x) => {
-        //console.log(x)
         if (x.hasOwnProperty('id')) {
           AccessRightDAO.update(x.id, x)
         } else {

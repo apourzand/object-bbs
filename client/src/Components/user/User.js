@@ -6,9 +6,23 @@ import {
   useMutation, useRedirect, ArrayInput, SimpleFormIterator, Filter
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
+import { Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
+import { ExpandMore } from '@material-ui/icons';
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   inlineBlock: { display: 'inline-flex', marginRight: '1rem' },
+  root: {
+    width: "100%",
+    background: "lightgray",
+  },
+  rootExpanded: {
+    background: "white",
+    width: "100%"
+  },
+  rootHeader: {
+    background: "lightgray",
+  },
 });
 
 export const UserList = props => (
@@ -45,28 +59,48 @@ export const UserEdit = props => {
     },
     [mutate, redirect]
   );
+
+  const [expanded, setExpanded] = React.useState('panel1');
+
   const classes = useStyles();
+
+  const rootClass = expanded ? classes.rootExpanded : classes.root;
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   return (
     <Edit undoable={false} {...props}>
       <SimpleForm save={save}>
-        <TextInput source="firstName" formClassName={classes.inlineBlock} />
-        <TextInput source="lastName" formClassName={classes.inlineBlock} />
-        <TextInput source="email" />
-        <PasswordInput source="password" />
-        <ReferenceInput source="roleId" reference="role">
-          <SelectInput optionText="name" />
-        </ReferenceInput>
-        <ArrayInput source="accessRights">
-          <SimpleFormIterator>
-            <ReferenceInput source="facilityId" reference="facility" label="Facility" formClassName={classes.inlineBlock} >
+            <TextInput source="firstName" />
+            <TextInput source="lastName" />
+            <TextInput source="email" />
+            <PasswordInput source="password" />
+            <ReferenceInput source="roleId" reference="role" >
               <SelectInput optionText="name" />
             </ReferenceInput>
-            <ReferenceInput source="accessProfileId" reference="accessProfile" label="Access profile" formClassName={classes.inlineBlock} >
-              <SelectInput optionText="name" />
-            </ReferenceInput>
-          </SimpleFormIterator>
-        </ArrayInput>
+        <Accordion
+          className={rootClass}
+          expanded={expanded === 'panel2'}
+          onChange={handleChange('panel2')}
+        >
+          <AccordionSummary expandIcon={<ExpandMore />} className={classes.rootHeader}>
+            <Typography className={classes.secondaryHeading}>Access Rights</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <ArrayInput source="accessRights">
+              <SimpleFormIterator>
+                <ReferenceInput source="facilityId" reference="facility" label="Facility" formClassName={classes.inlineBlock} >
+                  <SelectInput optionText="name" />
+                </ReferenceInput>
+                <ReferenceInput source="accessProfileId" reference="accessProfile" label="Access profile" formClassName={classes.inlineBlock} >
+                  <SelectInput optionText="name" />
+                </ReferenceInput>
+              </SimpleFormIterator>
+            </ArrayInput>
+          </AccordionDetails>
+        </Accordion>
       </SimpleForm>
     </Edit>
   )
